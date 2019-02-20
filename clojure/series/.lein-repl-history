@@ -1,0 +1,80 @@
+(doc pos-int?)
+(doc take)
+(doc while)
+(type slice-vec
+)
+(slices "4921" 3)
+(require '[clojure.string :as str])
+(defn slices [string length]
+  "Given a string of digits, output all the contiguous 
+substrings of length n in that string in the order that 
+they appear. The result is retuned in a vector."
+  (loop [str-vec   (str/split string #"")
+         slice-vec []
+         length    length]
+    (while (>= (count (take length (str-vec))) length)
+      (conj (take length (str-vec)) slice-vec)
+      (remove (first str-vec)))
+    slice-vec))
+(slices "4921" 3)
+(pst *e)
+(slices "4921" 3)
+(require '[clojure.string :as str])
+(defn slices [string length]
+  "Given a string of digits, output all the contiguous 
+substrings of length n in that string in the order that 
+they appear. The result is retuned in a vector."
+  
+  (loop [str-vec   (str/split string #"")
+         slice-vec []
+         length    length]
+    (while (>= (count (take length (str-vec))) length)
+      (conj (take length (str-vec)) slice-vec)
+      (remove (first str-vec)))
+    slice-vec))
+(def my-vec (str/split "4921" #""))
+(slices "4921" 3)
+(doc arity)
+(doc loop)
+(doc while)
+(doc let)
+(doc str/split)
+(doc rest)
+(doc cond)
+(doc count
+)
+(doc recur)
+'(1 2 3)
+(concat ("1" "2" "3"))
+(require '[clojure.string :as str])
+(defn isolate-slices [string length]
+  "produces [(\"1\" \"2\" \"3\") (\"2\" \"3\" \"4\")]"
+  (loop [str-vec   (str/split string #"")
+         slice-vec []
+         length    length]
+    (cond
+      (= length 0) slice-vec
+      (>= (count (take length str-vec)) length)
+      (recur
+       (rest str-vec)
+       (conj slice-vec (take length str-vec))
+       length)
+      :else slice-vec)))
+(defn slices [string length]
+  "Given a string of digits, output all the contiguous 
+substrings of length n in that string in the order that 
+they appear. The result is retuned in a vector."
+  (loop [iso-vec     (isolate-slices string length)
+         rem-coll    (count iso-vec)
+         form-slices []]
+    (cond
+      (= iso-vec []) form-slices
+      (= rem-coll 0) form-slices
+      :else (recur
+             (rest iso-vec)
+             (dec rem-coll)
+             (conj form-slices (apply str (first iso-vec)))))))
+(slices "4921" 3)
+(slices "4921" 0)
+(slices "4921" 10000)
+(doc partition)

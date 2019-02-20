@@ -1,0 +1,89 @@
+(defn verse
+  "Returns the nth verse of the song."
+  ;; three possibilities
+  ;;  - have > 2 bottles
+  ;;  - have 2 bottles
+  ;;  - have 1 bottle
+  ;;  - OR
+  ;;  - have 0 bottles
+  [num]
+  
+  (cond 
+    (> num 2) 
+      (concat num " bottles of beer on the wall, " num " bottles of beer.\n"
+      "Take one down and pass it around, " (- num 1) " bottles of beer on the wall.\n\n")
+    (== num 2)
+      (concat num " bottles of beer on the wall, " num " bottles of beer.\n"
+      "Take one down and pass it around, " (- num 1) " bottle of beer on the wall.\n\n")
+    (== num 1)
+      (str "1 bottle of beer on the wall, 1 bottle of beer.\n"
+        "Take it down and pass it around, no more bottles of beer on the wall.\n\n")
+    (== num 0)
+      (str "No more bottles of beer on the wall, no more bottles of beer.\n"
+        "Go to the store and buy some more, 99 bottles of beer on the wall.\n")
+    )
+  )
+(verse 3)
+(verse [3])
+(> 3 2)
+(user/verse 3)
+(verse num)
+def num 3
+defn num 3
+(def num 3)
+quit
+(defn verse
+  [num]
+)
+(defn bottles-str [n]
+  (str
+    (cond
+      (= 0 n) "no more bottles"
+      (= 1 n) "1 bottle"
+      :else (format "%d bottles" n))
+    " of beer"))
+(defn print-bottle [n]
+  (println (format "%s on the wall, %s." (bottles-str n) (bottles-str n)))
+  (println "Take one down and pass it around," (bottles-str (dec n)) "on the wall."))
+(defn sing [n]
+  (dorun (map print-bottle (reverse (range 1 (inc n)))))
+  (println "No more bottles of beer on the wall, no more bottles of beer.")
+  (println "Go to the store and buy some more," (bottles-str n) "on the wall."))
+(sing 5)
+quit
+(defn bot-str [n]
+  (str
+   (cond
+     (= 0 n) "no more bottles"
+     (= 1 n) "1 bottle"
+     :else (format "%d bottles" n))
+   " of beer"))
+(defn verse
+  "Returns the nth verse of the song."
+  ;; three possibilities
+  ;;  - have > 2 bottles
+  ;;  - have 2 bottles
+  ;;  - have 1 bottle
+  ;;  - OR
+  ;;  - have 0 bottles
+  [num]
+  (println (format "%s on the wall, %s." (bot-str num) (bot-str num)))
+  (println "Take one down and pass it around," (bot-str (dec num)) "on the wall."))
+  
+(defn sing
+  "Given a start and an optional end, returns all verses in this interval. If
+  end is not given, the whole song from start is sung."
+  ([start] (for [num (range start 0)] (verse [num])))
+  ([start end] (for [num (range start end)] (verse [num])))
+  )
+(sing 5)
+(verse 3)
+(defn sing
+  "Given a start and an optional end, returns all verses in this interval. If
+  end is not given, the whole song from start is sung."
+  ([start] (for [num (range start 0)] (println (verse [num]))))
+  ([start end] (for [num (range start end)] (println (verse [num]))))
+  )
+(sing 2)
+lein test
+quit
