@@ -1,0 +1,36 @@
+(doc count)
+(doc take)
+(doc str/split)
+(doc re-pattern)
+(prn (str \C))
+(prn (str/split strand (re-pattern nucleotide)))
+(prn (str/split "CBBAC" (re-pattern \C)))
+(prn (clojure.string/split "CBBAC" (re-pattern \C)))
+(require '[clojure.string :as str])
+(prn (clojure.string/split "CBBAC" (re-pattern \C)))
+(prn (clojure.string/split "CBBAC" (re-pattern "\C")))
+(prn (clojure.string/split "CBBAC" (re-pattern "\"C"")))
+)
+(prn (clojure.string/split "CBBAC" (re-pattern "\"C"")))
+(prn (str/split "CBBAC" (re-pattern "\"C"")))
+(prn (clojure.string/split "CBBAC" (re-pattern "\"C"")))
+(prn (str/split "CBBAC" (re-pattern "\"C")))
+(prn (str/split "CBBAC" (re-pattern "\\C")))
+(require '[clojure.string :as str])
+(defn nuc-count [nucleotide strand]
+  "Evaluates to the count of given nucleotide in a given strand
+nucleotide will be represented by a backslash followed by 
+a letter indicating one of the 4 nucleotides: C, A, T, G."
+  (loop [nucleotide (str nucleotide)
+         strand     strand]
+    (str/split strand (re-pattern nucleotide))))
+(nuc-count \C "CBBAC")
+(require '[clojure.string :as str])
+(defn nuc-count [nucleotide strand]
+  "Evaluates to the count of given nucleotide in a given strand
+nucleotide will be represented by a backslash followed by 
+a letter indicating one of the 4 nucleotides: C, A, T, G."
+  (loop [nucleotide (str nucleotide)
+         strand     strand]
+    (remove "" (str/split strand (re-pattern nucleotide)))))
+(nuc-count \C "CBBAC")

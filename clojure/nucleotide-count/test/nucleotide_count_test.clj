@@ -3,24 +3,24 @@
             nucleotide-count))
 
 (deftest empty-dna-strand-has-no-adenosine
-  (is (= 0 (nucleotide-count/count \A, ""))))
+  (is (= 0 (nucleotide-count/nuc-count \A, ""))))
 
 (deftest empty-dna-strand-has-no-nucleotides
   (is (= {\A 0, \T 0, \C 0, \G 0}
          (nucleotide-count/nucleotide-counts ""))))
 
 (deftest repetitive-cytidine-gets-counted
-  (is (= 5 (nucleotide-count/count \C "CCCCC"))))
+  (is (= 5 (nucleotide-count/nuc-count \C "CCCCC"))))
 
 (deftest repetitive-sequence-has-only-guanosine
   (is (= {\A 0, \T 0, \C 0, \G 8}
          (nucleotide-count/nucleotide-counts "GGGGGGGG"))))
 
 (deftest counts-only-thymidine
-  (is (= 1 (nucleotide-count/count \T "GGGGGTAACCCGG"))))
+  (is (= 1 (nucleotide-count/nuc-count \T "GGGGGTAACCCGG"))))
 
 (deftest validates-nucleotides
-  (is (thrown? Throwable (nucleotide-count/count \X "GACT"))))
+  (is (thrown? Throwable (nucleotide-count/nuc-count \X "GACT"))))
 
 (deftest counts-all-nucleotides
   (let [s "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"]
