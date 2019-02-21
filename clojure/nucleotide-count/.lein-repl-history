@@ -35,3 +35,4 @@ a letter indicating one of the 4 nucleotides: C, A, T, G."
     (remove "" (str/split strand (re-pattern nucleotide)))))
 (nuc-count \C "CBBAC")
 (doc partial)
+quit
