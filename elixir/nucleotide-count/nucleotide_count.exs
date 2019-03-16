@@ -14,6 +14,7 @@ defmodule NucleotideCount do
   """
   @spec count([char], char) :: non_neg_integer
   def count(strand, nucleotide) do
+    strand |> Enum.count(& &1 == nucleotide)
   end
 
   @doc """
@@ -26,5 +27,6 @@ defmodule NucleotideCount do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
+    Enum.into(Enum.map(@nucleotides, (fn(x) -> {x, (strand |> Enum.count(& &1 == x))} end)), %{})
   end
 end
