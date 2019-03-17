@@ -15,5 +15,20 @@ defmodule SecretHandshake do
   """
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do
+
+    actions = ["wink", "double blink", "close your eyes", "jump"]
+
+    encode = Integer.to_charlist(code, 2)
+    |> Enum.take(-5)
+    |> Enum.reverse()
+
+    decode = Enum.filter(actions,
+    fn(x) -> Enum.at(encode, Enum.find_index(actions, &(&1 == x)), ?0) == ?1 end)
+
+    if Enum.at(encode, 4, ?0) == ?1 do
+      Enum.reverse(decode)
+    else
+      decode
+    end
   end
 end
